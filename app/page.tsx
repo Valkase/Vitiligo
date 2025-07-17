@@ -30,7 +30,7 @@ export default function VitiligoWebsite() {
                 <Heart className="w-5 h-5 text-white" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                ProjectNameX
+                Chromacure
               </span>
             </div>
             <nav className="hidden md:flex space-x-8">
@@ -422,7 +422,7 @@ export default function VitiligoWebsite() {
                   <Heart className="w-5 h-5 text-white" />
                 </div>
                 <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  ProjectNameX
+                  Chromacure
                 </span>
               </div>
               <p className="text-gray-300 leading-relaxed">
@@ -495,7 +495,7 @@ export default function VitiligoWebsite() {
           </div>
 
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400 animate-fadeInUp animation-delay-400">
-            <p>&copy; 2024 ProjectNameX Research Initiative. All rights reserved.</p>
+            <p>&copy; 2024 Chromacure Research Initiative. All rights reserved.</p>
           </div>
         </div>
       </footer>

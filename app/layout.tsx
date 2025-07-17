@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Vitiligo-website',
-  description: 'Vitiligo-website',
-  generator: 'me',
+  title: 'Chromacure',
+  description: 'Chromacure Official Website',
+  generator: 'Chromacure development team',
 }
 
 export default function RootLayout({
