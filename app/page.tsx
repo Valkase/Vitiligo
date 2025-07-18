@@ -472,10 +472,10 @@ export default function VitiligoWebsite() {
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
           <div className="text-center animate-bounce">
             <div className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 bg-clip-text text-transparent animate-pulse mb-4">
-              🎉 Happy Birthday! 🎂
+              🎉 Happy Birthday! Ba. 🎂
             </div>
             <div className="text-2xl md:text-3xl text-white mb-8 animate-fadeInUp animation-delay-500">
-              Hope your special day is amazing!
+              Keep up the good work!!
             </div>
             <div className="flex justify-center space-x-2 mb-8">
               {[...Array(10)].map((_, i) => (
