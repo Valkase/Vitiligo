@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -17,8 +19,38 @@ import {
   ArrowRight,
 } from "lucide-react"
 import Link from "next/link"
+import { useState, useEffect } from "react"
 
 export default function VitiligoWebsite() {
+  const [leftValue, setLeftValue] = useState(0)
+  const [rightValue, setRightValue] = useState(0)
+  const [showBirthday, setShowBirthday] = useState(false)
+  const [isEasterEggActive, setIsEasterEggActive] = useState(false) // New state for date check
+
+  useEffect(() => {
+    const currentDate = new Date()
+    const currentMonth = currentDate.getMonth() // 0-indexed (July is 6)
+    const currentDay = currentDate.getDate()
+
+    // Check if the current date is between July 15th and July 21st
+    const active = currentMonth === 6 && currentDay >= 18 && currentDay <= 21
+    setIsEasterEggActive(active)
+
+    // If the easter egg is not active, ensure birthday message is hidden
+    if (!active) {
+      setShowBirthday(false)
+    }
+  }, []) // Run once on component mount to set active status
+
+  // Check for easter egg combination only if active
+  useEffect(() => {
+    if (isEasterEggActive && leftValue === 7 && rightValue === 20) {
+      setShowBirthday(true)
+    } else {
+      setShowBirthday(false) // Ensure it hides if conditions are not met
+    }
+  }, [leftValue, rightValue, isEasterEggActive]) // Dependencies for useEffect
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
@@ -229,7 +261,7 @@ export default function VitiligoWebsite() {
                 {[
                   "Reactivation of melanocytes to restore natural skin color",
                   "Significantly reduced treatment duration",
-                  "Affordable and competitive alternative",
+                  "New and Innovative alternative",
                   "Addresses common side effects",
                 ].map((item, index) => (
                   <div
@@ -412,6 +444,74 @@ export default function VitiligoWebsite() {
         </div>
       </section>
 
+      {/* Easter Egg - Conditionally rendered */}
+      {isEasterEggActive && (
+        <div className="bg-black py-4 px-6">
+          <div className="container mx-auto max-w-6xl">
+            <div className="flex justify-center items-center gap-4 opacity-20 hover:opacity-100 transition-opacity duration-500">
+              <input
+                type="number"
+                placeholder="L"
+                className="w-12 h-8 bg-gray-900 border border-gray-800 rounded text-white text-center text-xs focus:outline-none focus:border-blue-500"
+                onChange={(e) => setLeftValue(Number.parseInt(e.target.value) || 0)}
+              />
+              <span className="text-gray-600 text-xs">+</span>
+              <input
+                type="number"
+                placeholder="R"
+                className="w-12 h-8 bg-gray-900 border border-gray-800 rounded text-white text-center text-xs focus:outline-none focus:border-blue-500"
+                onChange={(e) => setRightValue(Number.parseInt(e.target.value) || 0)}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Birthday Message Overlay */}
+      {showBirthday && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
+          <div className="text-center animate-bounce">
+            <div className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 bg-clip-text text-transparent animate-pulse mb-4">
+              🎉 Happy Birthday! 🎂
+            </div>
+            <div className="text-2xl md:text-3xl text-white mb-8 animate-fadeInUp animation-delay-500">
+              Hope your special day is amazing!
+            </div>
+            <div className="flex justify-center space-x-2 mb-8">
+              {[...Array(10)].map((_, i) => (
+                <div key={i} className="text-2xl animate-bounce" style={{ animationDelay: `${i * 0.1}s` }}>
+                  🎈
+                </div>
+              ))}
+            </div>
+            <Button
+              onClick={() => setShowBirthday(false)}
+              className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-full transform hover:scale-110 transition-all duration-300"
+            >
+              Thank You! ✨
+            </Button>
+          </div>
+
+          {/* Floating Confetti Effect */}
+          <div className="absolute inset-0 pointer-events-none">
+            {[...Array(50)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute animate-ping"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 2}s`,
+                  animationDuration: `${2 + Math.random() * 2}s`,
+                }}
+              >
+                {["🎊", "🎉", "✨", "🌟", "💫"][Math.floor(Math.random() * 5)]}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Footer */}
       <footer className="bg-gray-950 border-t border-gray-800 py-16 px-6">
         <div className="container mx-auto max-w-6xl">
@@ -495,7 +595,7 @@ export default function VitiligoWebsite() {
           </div>
 
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400 animate-fadeInUp animation-delay-400">
-            <p>&copy; 2024 Chromacure Research Initiative. All rights reserved.</p>
+            <p>&copy; 2025 Chromacure Research Initiative. All rights reserved.</p>
           </div>
         </div>
       </footer>
